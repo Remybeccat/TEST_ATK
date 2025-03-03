@@ -29,7 +29,8 @@ def extract_time_spent(code_source):
     # Initialize dictionaries to store time spent
     phase_time_spent = {}
     action_time_spent = {}
-
+    actions_by_phase = {}
+    
     # Extract time spent for phases
     for phase in phases:
         phase_name = phase.find('a', class_='discreet').text.strip()
