@@ -69,10 +69,18 @@ if url is not None:
         # Obtenir les stations météo les plus proches
         phase_time_spent, action_time_spent = extract_time_spent(code_source)
 
-        if not nearby_stations.empty:
+        if not code_source.empty:
             st.write("Données trouvées :")
+                        # Display phase time spent
+            st.subheader("Temps passé par Phase")
+            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Temps passé (jours)"])
+            st.table(phase_df)
 
+            # Display action time spent
+            st.subheader("Temps passé par Actions")
+            action_df = pd.DataFrame(list(action_time_spent.items()), columns=["Action", "Temps passé (jours)"])
+            st.table(action_df)
         else:
-            st.write("Aucune donnée tourvée.")
+            st.write("Aucune donnée trouvée.")
     else:
-        st.write("UTL non valide ou introuvable.")
+        st.write("URL non valide ou introuvable.")
