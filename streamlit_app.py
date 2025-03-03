@@ -80,10 +80,6 @@ if url is not None:
             phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"])
             st.table(phase_df)
 
-            st.subheader("Temps passé par action et par phases")
-            phase_df = pd.DataFrame(list(actions_by_phase.items()), columns=["Phase", "Time Spent (days)"])
-            st.table(phase_df)
-
             # Display actions by phase
             for phase_name, actions in actions_by_phase.items():
                 st.subheader(f"Actions in Phase: {phase_name}")
