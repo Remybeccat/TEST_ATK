@@ -68,17 +68,14 @@ if url is not None:
     #st.write("Adresse saisie : ", url)  # Vérification de l'entrée utilisateur
 
     # Obtenir la latitude et la longitude à partir de l'adresse
-    code_source = get_html_content(url)
-
+    code_source = st.text_input("copier coller le code source:")
+    
     if code_source is not None:
-        st.write("URL existante")
-        code_source = st.text_input("copier coller le code source:")
-        # Obtenir les stations météo les plus proches
         phase_time_spent, actions_by_phase = extract_time_spent(code_source)
 
         if phase_time_spent is not None:
             st.write("Données trouvées :")
-                        # Display phase time spent
+            # Display phase time spent
             # Display phase time spent
             st.subheader("Time Spent by Phases")
             phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"])
