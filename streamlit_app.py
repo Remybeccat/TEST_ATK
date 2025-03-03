@@ -69,7 +69,7 @@ if url is not None:
         # Obtenir les stations météo les plus proches
         phase_time_spent, action_time_spent = extract_time_spent(code_source)
 
-        if not code_source.empty:
+        if not phase_time_spent.empty:
             st.write("Données trouvées :")
                         # Display phase time spent
             st.subheader("Temps passé par Phase")
