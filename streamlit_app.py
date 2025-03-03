@@ -1,7 +1,8 @@
 import streamlit as st
+import pandas as pd
 from bs4 import BeautifulSoup
 import requests
-import panda as pd
+import re
 
 st.write("L'application a démarré")  # Vérification initiale
 
