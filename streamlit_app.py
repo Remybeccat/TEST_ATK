@@ -34,27 +34,24 @@ def extract_time_spent(code_source):
 
     # Extract time spent for phases
     for phase in phases:
-        a = a + 1
         phase_name = phase.find('a', class_='discreet').text.strip()
-        print(phase_name)
-        duration_text = phase.find('div', class_='duration-and-load-infos resource-info-box').text.strip()
-        print(duration_text)
+        duration_text = phase.find('div', class_='duration-and-load-infos').text.strip()
         duration_match = re.search(r'(\d+,\d+|\d+)\s+jours?', duration_text)
-        print(duration_match)
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
-        print(duration)
         phase_time_spent[phase_name] = duration
-        print(phase_time_spent)
-        test.append([phase_name, duration_text, duration_match, duration, a])
-    # Extract time spent for actions
-    for action in actions:
-        action_name = action.find('a', class_='discreet').text.strip()
-        duration_text = action.find('div', class_='duration-and-load-infos').text.strip()
-        duration_match = re.search(r'(\d+,\d+|\d+)\s+jours?', duration_text)
-        duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
-        action_time_spent[action_name] = duration
 
-    return phase_time_spent, action_time_spent, test, phases
+        # Find actions within the current phase
+        actions = phase.find_all('li', class_='action')
+        actions_by_phase[phase_name] = []
+
+        for action in actions:
+            action_name = action.find('a', class_='discreet').text.strip()
+            action_duration_text = action.find('div', class_='duration-and-load-infos').text.strip()
+            action_duration_match = re.search(r'(\d+,\d+|\d+)\s+jours?', action_duration_text)
+            action_duration = float(action_duration_match.group(1).replace(',', '.')) if action_duration_match else 0
+            actions_by_phase[phase_name].append((action_name, action_duration))
+
+    return phase_time_spent, actions_by_phase
 
 # Example usage
 # code_source = ...  # The HTML content of the page
@@ -77,20 +74,21 @@ if url is not None:
         st.write("URL existante")
         code_source = st.text_input("copier coller le code source:")
         # Obtenir les stations météo les plus proches
-        phase_time_spent, action_time_spent, test, test_2 = extract_time_spent(code_source)
-        st.write(test)
-        st.write(test_2)
+        phase_time_spent, actions_by_phase = extract_time_spent(code_source)
+
         if phase_time_spent is not None:
             st.write("Données trouvées :")
                         # Display phase time spent
-            st.subheader("Temps passé par Phase")
-            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Temps passé (jours)"])
+            # Display phase time spent
+            st.subheader("Time Spent by Phases")
+            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"])
             st.table(phase_df)
 
-            # Display action time spent
-            st.subheader("Temps passé par Actions")
-            action_df = pd.DataFrame(list(action_time_spent.items()), columns=["Action", "Temps passé (jours)"])
-            st.table(action_df)
+            # Display actions by phase
+            for phase_name, actions in actions_by_phase.items():
+                st.subheader(f"Actions in Phase: {phase_name}")
+                actions_df = pd.DataFrame(actions, columns=["Action", "Time Spent (days)"])
+                st.table(actions_df)
         else:
             st.write("Aucune donnée trouvée.")
     else:
