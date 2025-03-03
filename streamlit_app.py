@@ -75,7 +75,7 @@ if url is not None:
     st.write(code_source)
     if code_source is not None:
         st.write("URL existante")
-
+        code_source = st.text_input("copier coller le code source:")
         # Obtenir les stations météo les plus proches
         phase_time_spent, action_time_spent, test, test_2 = extract_time_spent(code_source)
         st.write(test)
