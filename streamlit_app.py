@@ -30,9 +30,11 @@ def extract_time_spent(code_source):
     phase_time_spent = {}
     action_time_spent = {}
     test = []
+    a = 0
 
     # Extract time spent for phases
     for phase in phases:
+        a = a + 1
         phase_name = phase.find('a', class_='discreet').text.strip()
         print(phase_name)
         duration_text = phase.find('div', class_='duration-and-load-infos resource-info-box').text.strip()
@@ -43,7 +45,7 @@ def extract_time_spent(code_source):
         print(duration)
         phase_time_spent[phase_name] = duration
         print(phase_time_spent)
-        test.append([phase_name, duration_text, duration_match, duration])
+        test.append([phase_name, duration_text, duration_match, duration, a])
     # Extract time spent for actions
     for action in actions:
         action_name = action.find('a', class_='discreet').text.strip()
