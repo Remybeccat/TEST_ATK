@@ -33,10 +33,15 @@ def extract_time_spent(code_source):
     # Extract time spent for phases
     for phase in phases:
         phase_name = phase.find('a', class_='discreet').text.strip()
+        print(phase_name)
         duration_text = phase.find('div', class_='duration-and-load-infos resource-info-box').text.strip()
+        print(duration_text)
         duration_match = re.search(r'(\d+,\d+|\d+)\s+jours?', duration_text)
+        print(duration_match)
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
+        print(duration)
         phase_time_spent[phase_name] = duration
+        print(phase_time_spent)
 
     # Extract time spent for actions
     for action in actions:
