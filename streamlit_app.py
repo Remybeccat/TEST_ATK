@@ -68,7 +68,7 @@ st.title('Analyse du temps passé sur ATK')
 url = st.text_input("saisir l'URL de la page planning atikteam:")
 
 if url is not None:
-    st.write("Adresse saisie : ", url)  # Vérification de l'entrée utilisateur
+    #st.write("Adresse saisie : ", url)  # Vérification de l'entrée utilisateur
 
     # Obtenir la latitude et la longitude à partir de l'adresse
     code_source = get_html_content(url)
