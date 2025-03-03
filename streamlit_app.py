@@ -54,7 +54,7 @@ def extract_time_spent(code_source):
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
         action_time_spent[action_name] = duration
 
-    return phase_time_spent, action_time_spent, test
+    return phase_time_spent, action_time_spent, test, phases
 
 # Example usage
 # code_source = ...  # The HTML content of the page
@@ -77,8 +77,9 @@ if url is not None:
         st.write("URL existante")
 
         # Obtenir les stations météo les plus proches
-        phase_time_spent, action_time_spent, test = extract_time_spent(code_source)
+        phase_time_spent, action_time_spent, test, test_2 = extract_time_spent(code_source)
         st.write(test)
+        st.write(test_2)
         if phase_time_spent is not None:
             st.write("Données trouvées :")
                         # Display phase time spent
