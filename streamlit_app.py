@@ -69,7 +69,7 @@ if url is not None:
 
     # Obtenir la latitude et la longitude à partir de l'adresse
     code_source = get_html_content(url)
-    st.write(code_source)
+
     if code_source is not None:
         st.write("URL existante")
         code_source = st.text_input("copier coller le code source:")
