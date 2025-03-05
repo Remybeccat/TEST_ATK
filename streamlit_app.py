@@ -41,7 +41,7 @@ def extract_time_spent(code_source):
         duration_match = re.search(r'(\d+,\d+|\d+)\s+j.?', duration_text)
         st.write(duration_match)
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
-        phase_time_spent[phase_name] = duration
+        phase_time_spent[phase_name] = duration , CP_text
 
         # Find actions within the current phase
         actions = phase.find_all('li', class_='action')
@@ -81,7 +81,7 @@ if url is not None:
             # Display phase time spent
             # Display phase time spent
             st.subheader("Time Spent by Phases")
-            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"])
+            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)" , "CP"])
             st.table(phase_df)
 
             # Display actions by phase
