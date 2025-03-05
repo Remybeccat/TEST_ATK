@@ -45,7 +45,7 @@ def extract_time_spent(code_source):
 
         for action in actions:
             action_name = action.find('a', class_='discreet').text.strip()
-            action_duration_text = action.find('div', class_='duration-and-load-infos resource-info-box').text.strip()
+            action_duration_text = action.find('div', class_='tooltip-info-button').text.strip()
             action_duration_match = re.search(r'(\d+,\d+|\d+)\s+jours?', action_duration_text)
             action_duration = float(action_duration_match.group(1).replace(',', '.')) if action_duration_match else 0
             actions_by_phase[phase_name].append((action_name, action_duration))
