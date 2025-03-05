@@ -34,9 +34,9 @@ def extract_time_spent(code_source):
     # Extract time spent for phases
     for phase in phases:
         phase_name = phase.find('a', class_='discreet').text.strip()
-        duration_text = phase.find('div', class_='tooltip-info-button').text.strip()
-        title_text = phase.find('div', class_='tooltip-info-button')['title']
-        st.write(title_text)
+        #duration_text = phase.find('div', class_='tooltip-info-button').text.strip()
+        duration_text = phase.find('div', class_='tooltip-info-button')['title']
+        st.write(duration_text)
         duration_match = re.search(r'(\d+,\d+|\d+)\s+j.?', duration_text)
         st.write(duration_match)
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
