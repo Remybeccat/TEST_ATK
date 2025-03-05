@@ -41,7 +41,7 @@ def extract_time_spent(code_source):
         duration_match = re.search(r'(\d+,\d+|\d+)\s+j.?', duration_text)
         st.write(duration_match)
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
-        phase_time_spent[phase_name] = duration , CP_text
+        phase_time_spent[phase_name] = [duration , CP_text]
 
         # Find actions within the current phase
         actions = phase.find_all('li', class_='action')
