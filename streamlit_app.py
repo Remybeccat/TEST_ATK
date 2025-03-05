@@ -88,7 +88,7 @@ if url is not None:
             # Display phase time spent
             st.subheader("Time Spent by Phases")
             #phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"]) #ANCIEN
-            phase_data = [{"Phase": phase, "Time Spent (days)": details["Time Spent (days)"], "CP Text": details["Responsable"]} for phase, details in phase_time_spent.items()]
+            phase_data = [{"Phase": phase, "Time Spent (days)": details["Time Spent (days)"], "CP": details["CP Text"]} for phase, details in phase_time_spent.items()]
             phase_df = pd.DataFrame(phase_data)
             st.table(phase_df)
 
