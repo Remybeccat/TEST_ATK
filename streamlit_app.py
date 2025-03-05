@@ -81,7 +81,7 @@ if url is not None:
             # Display phase time spent
             # Display phase time spent
             st.subheader("Time Spent by Phases")
-            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)" , "CP"])
+            phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"])
             st.table(phase_df)
 
             # Display actions by phase
