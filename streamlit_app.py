@@ -38,8 +38,6 @@ def extract_time_spent(code_source):
         phase_name = phase.find('a', class_='discreet').text.strip()
         duration_text = phase.find('div', class_='tooltip-info-button')['title']
         #st.write(duration_text)
-        realisation_text = phase.find('div', class_='progress')['title']
-        st.write(realisation_text)
         CP_text = re.search(r'\[(.*?)\]', duration_text)
         #st.write(CP_text)
         CP_text = CP_text.group(0).replace('[', '').replace(']', '')
@@ -68,6 +66,8 @@ def extract_time_spent(code_source):
             CP_name = CP_name.group(0).replace('[', '').replace(']', '')
             actions_by_phase[phase_name].append((action_name, action_duration, CP_name ))
             #st.write(CP_name)
+            realisation_text = action.find('div', class_='progress')['title']
+            st.write(realisation_text)
             total_temps_action = total_temps_action + action_duration
         actions_by_phase[phase_name].append(("Total", total_temps_action, " " ))
     return phase_time_spent, actions_by_phase
