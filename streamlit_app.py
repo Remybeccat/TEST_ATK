@@ -59,8 +59,8 @@ def extract_time_spent(code_source):
             action_duration_match = re.search(r'(\d+,\d+|\d+)\s+j.?', action_duration_text)
             action_duration = float(action_duration_match.group(1).replace(',', '.')) if action_duration_match else 0
             actions_by_phase[phase_name].append((action_name, action_duration))
-            CP_text = re.search(r'\[(.*?)\]', duration_text)
-            st.write(CP_text)
+            CP_name = action.find('a', class_='user')['title']
+            st.write(CP_name)
             CP_text = CP_text.group(0).replace('[', '').replace(']', '')
 
     return phase_time_spent, actions_by_phase
