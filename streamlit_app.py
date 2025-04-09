@@ -88,7 +88,7 @@ if url is not None:
     code_source = st.text_input("copier coller le code source:")
     
     if code_source is not None:
-        phase_time_spent, actions_by_phase, CP = extract_time_spent(code_source)
+        phase_time_spent, actions_by_phase = extract_time_spent(code_source)
 
         if phase_time_spent is not None:
             st.write("Données trouvées :")
