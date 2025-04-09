@@ -66,7 +66,7 @@ def extract_time_spent(code_source):
             CP_name = CP_name.group(0).replace('[', '').replace(']', '')
             actions_by_phase[phase_name].append((action_name, action_duration, CP_name ))
             #st.write(CP_name)
-            realisation_text = action.find('div', class_='progress')['title']
+            realisation_text = action.find('div', class_='progress_bar')['title']
             st.write(realisation_text)
             total_temps_action = total_temps_action + action_duration
         actions_by_phase[phase_name].append(("Total", total_temps_action, " " ))
