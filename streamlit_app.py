@@ -68,8 +68,10 @@ def extract_time_spent(code_source):
             #st.write(CP_name)
             realisation_text = action.find('div', class_='progress_bar')['title']
             realisation_match = re.search(r'\:(.*?)\%', realisation_text)
+            realisation = float(realisation_match.group(1).replace(',', '.')) if realisation_match else 0
             st.write(realisation_text)
             st.write(realisation_match)
+            st.write(realisation)
             total_temps_action = total_temps_action + action_duration
         actions_by_phase[phase_name].append(("Total", total_temps_action, " " ))
     return phase_time_spent, actions_by_phase
