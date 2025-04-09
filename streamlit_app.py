@@ -67,7 +67,7 @@ def extract_time_spent(code_source):
             actions_by_phase[phase_name].append((action_name, action_duration, CP_name ))
             #st.write(CP_name)
             realisation_text = action.find('div', class_='progress_bar')['title']
-            realisation_match = re.search(r'\:(.*?)\%, realisation_text)
+            realisation_match = re.search(r'\:(.*?)\%', realisation_text)
             st.write(realisation_text)
             st.write(realisation_match)
             total_temps_action = total_temps_action + action_duration
