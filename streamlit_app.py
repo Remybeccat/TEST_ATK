@@ -68,8 +68,7 @@ def extract_time_spent(code_source):
             #st.write(CP_name)
             total_temps_action = total_temps_action + action_duration
         actions_by_phase[phase_name].append(("Total", total_temps_action, " " ))
-    phase_time_spent[phase_name].append(("Total", total_temps_phase))
-    return phase_time_spent, actions_by_phase
+        return phase_time_spent, actions_by_phase
 
 # Example usage
 # code_source = ...  # The HTML content of the page
