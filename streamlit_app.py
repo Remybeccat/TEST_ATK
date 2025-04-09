@@ -31,6 +31,8 @@ def extract_time_spent(code_source):
     action_time_spent = {}
     actions_by_phase = {}
     
+    total_temps_phase = 0
+        
     # Extract time spent for phases
     for phase in phases:
         phase_name = phase.find('a', class_='discreet').text.strip()
@@ -42,6 +44,7 @@ def extract_time_spent(code_source):
         duration_match = re.search(r'(\d+,\d+|\d+)\s+j.?', duration_text)
         st.write(duration_match)
         duration = float(duration_match.group(1).replace(',', '.')) if duration_match else 0
+        total_temps_phase = total_temps_phase + duration
         #phase_time_spent[phase_name] = duration #- ANCIEN
             # Stocker les informations dans le dictionnaire
         phase_time_spent[phase_name] = {
@@ -52,7 +55,8 @@ def extract_time_spent(code_source):
         # Find actions within the current phase
         actions = phase.find_all('li', class_='action')
         actions_by_phase[phase_name] = []
-
+        
+        total_temps_action = 0
         for action in actions:
             action_name = action.find('a', class_='discreet').text.strip()
             action_duration_text = action.find('div', class_='tooltip-info-button')['title']
@@ -62,8 +66,9 @@ def extract_time_spent(code_source):
             CP_name = CP_name.group(0).replace('[', '').replace(']', '')
             actions_by_phase[phase_name].append((action_name, action_duration, CP_name ))
             #st.write(CP_name)
-            
-
+            total_temps_action = total_temps_action + action_duration
+        actions_by_phase[phase_name].append(("Total", total_temps_action, " " ))
+    
     return phase_time_spent, actions_by_phase
 
 # Example usage
