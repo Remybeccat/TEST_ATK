@@ -37,7 +37,7 @@ def extract_time_spent(code_source):
         duration_text = phase.find('div', class_='tooltip-info-button')['title']
         st.write(duration_text)
         CP_text = re.search(r'\[(.*?)\]', duration_text)
-        'st.write(CP_text)
+        #st.write(CP_text)
         CP_text = CP_text.group(0).replace('[', '').replace(']', '')
         duration_match = re.search(r'(\d+,\d+|\d+)\s+j.?', duration_text)
         st.write(duration_match)
