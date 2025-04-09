@@ -64,16 +64,16 @@ def extract_time_spent(code_source):
             action_duration = float(action_duration_match.group(1).replace(',', '.')) if action_duration_match else 0
             CP_name = re.search(r'\[(.*?)\]', action_duration_text)
             CP_name = CP_name.group(0).replace('[', '').replace(']', '')
-            actions_by_phase[phase_name].append((action_name, action_duration, CP_name ))
             #st.write(CP_name)
             realisation_text = action.find('div', class_='progress_bar')['title']
             realisation_match = re.search(r'\:(.*?)\%', realisation_text)
             realisation = float(realisation_match.group(1).replace(',', '.')) if realisation_match else 0
-            st.write(realisation_text)
-            st.write(realisation_match)
-            st.write(realisation)
+            #st.write(realisation_text)
+            #st.write(realisation_match)
+            #st.write(realisation)
+            actions_by_phase[phase_name].append((action_name, action_duration, CP_name, realisation))
             total_temps_action = total_temps_action + action_duration
-        actions_by_phase[phase_name].append(("Total", total_temps_action, " " ))
+        actions_by_phase[phase_name].append(("Total", total_temps_action, " " , " "))
     return phase_time_spent, actions_by_phase
 
 # Example usage
@@ -109,7 +109,7 @@ if url is not None:
             # Display actions by phase
             for phase_name, actions in actions_by_phase.items():
                 st.subheader(f"Actions in Phase: {phase_name}")
-                actions_df = pd.DataFrame(actions, columns=["Action", "Time Spent (days)", "CP"])
+                actions_df = pd.DataFrame(actions, columns=["Action", "Time Spent (days)", "CP", "% réalisé"])
                 st.table(actions_df)
         else:
             st.write("Aucune donnée trouvée.")
