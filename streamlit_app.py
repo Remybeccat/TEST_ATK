@@ -38,6 +38,8 @@ def extract_time_spent(code_source):
         phase_name = phase.find('a', class_='discreet').text.strip()
         duration_text = phase.find('div', class_='tooltip-info-button')['title']
         #st.write(duration_text)
+        realisation_text = phase.find('div', class_='progress')['title']
+        st.write(realisation_text)
         CP_text = re.search(r'\[(.*?)\]', duration_text)
         #st.write(CP_text)
         CP_text = CP_text.group(0).replace('[', '').replace(']', '')
