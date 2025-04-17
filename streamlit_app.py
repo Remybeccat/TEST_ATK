@@ -104,7 +104,7 @@ if url is not None:
             #phase_df = pd.DataFrame(list(phase_time_spent.items()), columns=["Phase", "Time Spent (days)"]) #ANCIEN
             phase_data = [{"Phase": phase, "Time Spent (days)": details["Time Spent (days)"], "CP": details["CP Text"]} for phase, details in phase_time_spent.items()]
             phase_df = pd.DataFrame(phase_data)
-            st.table(phase_df)
+            st.dataframe(phase_df)
 
             # Display actions by phase
             for phase_name, actions in actions_by_phase.items():
