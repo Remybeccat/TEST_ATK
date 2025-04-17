@@ -110,7 +110,7 @@ if url is not None:
             for phase_name, actions in actions_by_phase.items():
                 st.subheader(f"Actions in Phase: {phase_name}")
                 actions_df = pd.DataFrame(actions, columns=["Action", "Time Spent (days)", "CP", "% réalisé"])
-                st.table(actions_df)
+                st.dataframe(actions_df)
         else:
             st.write("Aucune donnée trouvée.")
     else:
