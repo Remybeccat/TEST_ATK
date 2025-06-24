@@ -73,7 +73,7 @@ def extract_time_spent(code_source):
             #st.write(realisation_match)
             #st.write(realisation)
             actions_by_phase[phase_name].append((action_name, action_duration, CP_name, realisation))
-            total_temps_passe = total_temps_passe + action_duration*realisation
+            total_temps_passe = total_temps_passe + action_duration*realisation/100
             total_temps_action = total_temps_action + action_duration
         actions_by_phase[phase_name].append(("Total", total_temps_action, " " , total_temps_passe))
     return phase_time_spent, actions_by_phase
