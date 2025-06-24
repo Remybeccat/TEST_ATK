@@ -57,6 +57,7 @@ def extract_time_spent(code_source):
         actions_by_phase[phase_name] = []
         
         total_temps_action = 0
+        total_temps_passe = 0
         for action in actions:
             action_name = action.find('a', class_='discreet').text.strip()
             action_duration_text = action.find('div', class_='tooltip-info-button')['title']
